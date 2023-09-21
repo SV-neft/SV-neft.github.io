@@ -13,11 +13,16 @@
 <script src="sdk.js"></script>
 <script>
     const slideUpWidget = new SlideUpWidget(window.localStorage, window.navigator)
-    slideUpWidget.showBankSelector(new URLSearchParams(window.location.search).get("url"))
+    slideUpWidget.showBankSelector(new URLSearchParams(window.location.search).get("url")).then(()=>{
+    }).finally(()=>{
+        const closeButton = document.querySelector("div.slide-up-widget__header-close-btn")
+        console.log(closeButton)
+        closeButton?.addEventListener("click",()=>window.postMessage("closed"))
+    })
 
-    const closeButton = document.querySelector("div.slide-up-widget__header-close-btn")
-    console.log(closeButton)
-    closeButton?.addEventListener("click",()=>window.postMessage("closed"))
+    // const closeButton = document.querySelector("div.slide-up-widget__header-close-btn")
+    // console.log(slideUpWidget)
+    // closeButton?.addEventListener("click",()=>window.postMessage("closed"))
 </script>
 </body>
 </html>
