@@ -17,7 +17,10 @@
     }).finally(()=>{
         const closeButton = document.querySelector("div.slide-up-widget__header-close-btn")
         console.log(closeButton)
-        closeButton?.addEventListener("click",()=>window.postMessage("closed"))
+        closeButton?.addEventListener("click",()=> {
+            window.postMessage("closed")
+            window.ReactNativeWebView.postMessage("closed")
+        })
     })
 
     // const closeButton = document.querySelector("div.slide-up-widget__header-close-btn")
