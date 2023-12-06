@@ -6,16 +6,23 @@
   <body>
   <script src="sdk.js"></script>
   <script>
-    (async ()=>{
-      try {
-        const url = new URLSearchParams(window.location.search).get("url")
-        const sdk = new SlideUpWidget(window.localStorage, window.navigator)
-        const bankList = await sdk.getBankList(url)
-        window.postMessage(JSON.stringify(bankList))
-        window.ReactNativeWebView?.postMessage(JSON.stringify(bankList))
-      } catch (e) {
+    document.addEventListener("DOMContentLoaded", function() {
+      const searchParams = new URLSearchParams(window.location.search);
+      if (searchParams.get('redirect') === 'true') {
+        window.location.href = 'svNeft://';
+      } else {
+        (async ()=>{
+          try {
+            const url = new URLSearchParams(window.location.search).get("url")
+            const sdk = new SlideUpWidget(window.localStorage, window.navigator)
+            const bankList = await sdk.getBankList(url)
+            window.postMessage(JSON.stringify(bankList))
+            window.ReactNativeWebView?.postMessage(JSON.stringify(bankList))
+          } catch (e) {
+          }
+        })()
       }
-    })()
+    });
   </script>
   </body>
 </html>
