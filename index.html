@@ -9,7 +9,11 @@
     document.addEventListener("DOMContentLoaded", function() {
       const searchParams = new URLSearchParams(window.location.search);
       if (searchParams.get('redirect') === 'true') {
-        window.location.href = 'svNeft://';
+        if (searchParams.get('done') === 'true') {
+          window.location.href = 'svneft://pay?done=true';
+        } else {
+          window.location.href = 'svneft://pay?done=false';
+        }
       } else {
         (async ()=>{
           try {
